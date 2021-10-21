@@ -56,8 +56,8 @@ Your menu should look something like this:
 Welcome to Code Platoon Video!
 1. View video inventory
 2. View customer's rented videos
-3. Rent video
-4. Return video
-5. Add new customer
+3. Add new customer
+4. Rent video
+5. Return video
 6. Exit
 ```
