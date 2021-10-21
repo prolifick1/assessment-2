@@ -4,8 +4,7 @@
 ## Important Grading Information
 - Make sure you read the [Assessment-2 Grading Rubric](https://docs.google.com/spreadsheets/d/1AlAQukmB3SS7IyW2hu0zY-9RaQnHY3lLeTi2O1fUb30/edit?usp=sharing).
   - Application Correctness (50%)
-  - Code Design (40%)
-  - CSV Files (10%)
+  - Code Design (50%)
 - You need to get a 75% or better to pass. (You must pass all assessments in order to graduate Code Platoon's program.)
 - If you fail the assessment, you have can retake it once to improve your score. For this assessment... 
   - *5% penalty*: If you complete and submit the retake **within one week** of receiving your grade. 
@@ -27,11 +26,11 @@ Your Video Inventory Management application should manage the following data:
   - customer account type (s/p/k/pk)
     - "s" = standard account: max 1 rental out at a time
     - "p" = premium account: max 3 rentals out at a time
-    - "k" = kid's account: can not rent any "R" rated movies
+    - "sk" = standard kid's account: can not rent any "R" rated movies
     - "pk" = premium kid's account: max 3 rentals out at a time AND can not rent any "R" rated movies   
   - first name
   - last name 
-  - current list of video rentals (*by title*)
+  - current list of video rentals (*by title*), each title separated by a forward slash "/"
 - Manage the store's video inventory:
   - video id
   - video title
@@ -42,22 +41,25 @@ Your application should allow:
 - Viewing the current video inventory for the store
 - Viewing a customer's current rented videos
   - customer *by id*
+- Adding a new customer
+  - You should not have an initial list of video rentals assigned to a newly created customer
+  - this should update the relavent CSV file(s)
 - Renting a video out to a customer
   - video *by title*
   - customer *by id*
-  - **IMPORTANT:** Customers should not be allowed to have more than 3 videos rented at any given time. Your application should enforce this limitation!
+  - **IMPORTANT:** Customers should be limited by based on their account type. Your application should enforce these limitations!
+  - this should update the relavent CSV file(s)
 - Returning a video from a customer
   - video *by title*
   - customer *by id*
-- Adding a new customer
-  - You should not have an initial list of video rentals assigned to a newly created customer
+  - this should update the relavent CSV file(s)
 - Exiting the application
 
 Be sure to give careful consideration into what data structures & data types (classes) you might need to use in your application logic. Also, your application should always keep the CSV data files updated! You need data records to be backed up in a file, in case your application were to crash (and lose data internally).
 
 Your menu should look something like this: 
 ```
-Welcome to Code Platoon Video!
+== Welcome to Code Platoon Video! ==
 1. View video inventory
 2. View customer's rented videos
 3. Add new customer
