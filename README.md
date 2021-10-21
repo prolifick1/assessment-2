@@ -24,7 +24,11 @@
 Your Video Inventory Management application should manage the following data:
 - Manage customer information:
   - customer id
-  - customer account type
+  - customer account type (s/p/k/pk)
+    - "s" = standard account: max 1 rental out at a time
+    - "p" = premium account: max 3 rentals out at a time
+    - "k" = kid's account: can not rent any "R" rated movies
+    - "pk" = premium kid's account: max 3 rentals out at a time AND can not rent any "R" rated movies   
   - first name
   - last name 
   - current list of video rentals (*by title*)
