@@ -26,7 +26,7 @@ Your Video Inventory Management application should manage the following data:
   - customer account type (sx/px/sf/pf)
     - "sx" = standard account: max 1 rental out at a time
     - "px" = premium account: max 3 rentals out at a time
-    - "sf" = standard family account: can not rent any "R" rated movies
+    - "sf" = standard family account: max 1 rental out at a time AND can not rent any "R" rated movies
     - "pf" = premium family account: max 3 rentals out at a time AND can not rent any "R" rated movies   
   - first name
   - last name 
