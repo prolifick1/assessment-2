@@ -23,7 +23,7 @@
 Your Video Inventory Management application should manage the following data:
 - Manage customer information:
   - customer id
-  - customer account type (s/p/k/pk)
+  - customer account type (s/p/sk/pk)
     - "s" = standard account: max 1 rental out at a time
     - "p" = premium account: max 3 rentals out at a time
     - "sk" = standard kid's account: can not rent any "R" rated movies
@@ -55,7 +55,7 @@ Your application should allow:
   - this should update the relavent CSV file(s)
 - Exiting the application
 
-Be sure to give careful consideration into what data structures & data types (classes) you might need to use in your application logic. Also, your application should always keep the CSV data files updated! You need data records to be backed up in a file, in case your application were to crash (and lose data internally).
+Be sure to give careful consideration into what data structures & data types (classes) you might need to use in your application logic. Also, your application must always keep the CSV data files updated whenever data changes! You need data records to be backed up in a file, in case your application were to crash (and lose data internally).
 
 Your menu should look something like this: 
 ```
