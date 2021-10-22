@@ -1,6 +1,7 @@
-id,first_name,last_name,current_video_rentals
-1,Jon,Young,Guardians Of The Galaxy/La La Land
-2,Tom,Prete,Prometheus/Split/Sing
-3,Rod,Levy,The Dark Knight/Guardians Of The Galaxy/Split
-4,Ankur,Shah,The Prestige
-5,Chris,Howell,
+id,account_type,first_name,last_name,current_video_rentals
+1,sx,Monica Gellar,The Godfather
+2,px,Chandler Bing,The Dark Knight/Inception/The Prestige
+3,pf,Rachel Green,Inside Out/WALL-E/The Prestige
+4,sx,Ross Gellar,
+5,sf,Phoebe Buffay,WALL-E
+6,px,Joey Tribbiani,Deadpool/The Godfather
