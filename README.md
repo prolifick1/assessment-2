@@ -3,8 +3,8 @@
 
 ## Important Grading Information
 - Make sure you read the [Assessment-2 Grading Rubric](https://docs.google.com/spreadsheets/d/1AlAQukmB3SS7IyW2hu0zY-9RaQnHY3lLeTi2O1fUb30/edit?usp=sharing).
-  - Application Correctness (50%)
-  - Code Design (50%)
+  - Application Correctness (60%)
+  - Code Design (40%)
 - You need to get a 75% or better to pass. (You must pass all assessments in order to graduate Code Platoon's program.)
 - If you fail the assessment, you have can retake it once to improve your score. For this assessment... 
   - *5% penalty*: If you complete and submit the retake **within one week** of receiving your grade. 
