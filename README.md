@@ -28,8 +28,8 @@ Your Video Inventory Management application should manage the following data:
     - "px" = premium account: max 3 rentals out at a time
     - "sf" = standard family account: max 1 rental out at a time AND can not rent any "R" rated movies
     - "pf" = premium family account: max 3 rentals out at a time AND can not rent any "R" rated movies   
-  - first name
-  - last name 
+  - customer first name
+  - customer last name 
   - current list of video rentals (*by title*), each title separated by a forward slash "/"
 - Manage the store's video inventory:
   - video id
