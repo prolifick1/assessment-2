@@ -49,7 +49,7 @@ Your application should allow:
 - Renting a video out to a customer
   - video *by title*
   - customer *by id*
-  - **IMPORTANT:** Customers should be limited by based on their account type. Your application should enforce these limitations!
+  - **IMPORTANT:** Customers should be limited based on their account type. Your application should enforce these limitations when attempting to rent a video!
   - this should update the relavent CSV file(s)
 - Returning a video from a customer
   - video *by title*
