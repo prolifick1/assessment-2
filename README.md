@@ -23,11 +23,11 @@
 Your Video Inventory Management application should manage the following data:
 - Manage customer information:
   - customer id
-  - customer account type (s/p/sk/pk)
+  - customer account type (s/p/sf/pf)
     - "s" = standard account: max 1 rental out at a time
     - "p" = premium account: max 3 rentals out at a time
-    - "sk" = standard kid's account: can not rent any "R" rated movies
-    - "pk" = premium kid's account: max 3 rentals out at a time AND can not rent any "R" rated movies   
+    - "sf" = standard family account: can not rent any "R" rated movies
+    - "pf" = premium family account: max 3 rentals out at a time AND can not rent any "R" rated movies   
   - first name
   - last name 
   - current list of video rentals (*by title*), each title separated by a forward slash "/"
@@ -41,6 +41,7 @@ Your application should allow:
 - Viewing the current video inventory for the store
 - Viewing a customer's current rented videos
   - customer *by id*
+  - each title should be listed separately (i.e. not displayed with slashes from the CSV file)
 - Adding a new customer
   - You should not have an initial list of video rentals assigned to a newly created customer
   - this should update the relavent CSV file(s)
