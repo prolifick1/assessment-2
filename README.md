@@ -45,6 +45,7 @@ Your application should allow:
   - each title should be listed separately (i.e. not displayed with slashes from the CSV file)
 - Adding a new customer
   - you should not have an initial list of video rentals assigned to a newly created customer
+  - can you prevent duplicate ids from existing?
   - this should update the relavent CSV file(s)
 - Renting a video out to a customer
   - video *by title*
