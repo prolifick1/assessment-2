@@ -35,6 +35,7 @@ Your Video Inventory Management application should manage the following data:
   - video id
   - video title
   - video rating
+  - video release year
   - number of copies currently available in-store
 
 Your application should allow:
@@ -43,7 +44,7 @@ Your application should allow:
   - customer *by id*
   - each title should be listed separately (i.e. not displayed with slashes from the CSV file)
 - Adding a new customer
-  - You should not have an initial list of video rentals assigned to a newly created customer
+  - you should not have an initial list of video rentals assigned to a newly created customer
   - this should update the relavent CSV file(s)
 - Renting a video out to a customer
   - video *by title*
@@ -56,13 +57,13 @@ Your application should allow:
   - this should update the relavent CSV file(s)
 - Exiting the application
 
-Be sure to give careful consideration into what data structures & data types (classes) you might need to use in your application logic. Also, your application must always keep the CSV data files updated whenever data changes! You need data records to be backed up in a file, in case your application were to crash (and lose data internally).
+Be sure to give careful consideration into what data structures & data types (including classes) you might need to use in your application logic. Also, your application MUST always keep the CSV data files updated whenever data changes! You need data records to be backed up in a file, in case your application were to crash (and lose data internally).
 
 Your menu should look something like this: 
 ```
 == Welcome to Code Platoon Video! ==
-1. View video inventory
-2. View customer's rented videos
+1. View store video inventory
+2. View customer rented videos
 3. Add new customer
 4. Rent video
 5. Return video
