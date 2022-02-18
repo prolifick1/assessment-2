@@ -8,7 +8,7 @@
 - You need to get a 75% or better to pass. (You must pass all assessments in order to graduate Code Platoon's program.)
 - If you fail the assessment, you have can retake it once to improve your score. For this assessment... 
   - *5% penalty*: If you complete and submit the retake **within one week** of receiving your grade. 
-  - *10% penalty*: If you complete and submit the retake **by 8:30am, November 29th, 2021** (end of the Thankgiving break). A retake for this assessment WILL NOT be accepted after this date.
+  - *10% penalty*: If you complete and submit the retake **by 8:30am, March 26th, 2022**. A retake for this assessment WILL NOT be accepted after this date.
 
 ## Rules / Process
 - This test is fully open notes and open Google, but is not to be completed with the help of other students/individuals.
@@ -46,16 +46,16 @@ Your application should allow:
 - Adding a new customer
   - you should not have an initial list of video rentals assigned to a newly created customer
   - can you prevent duplicate ids from existing?
-  - this should update the relavent CSV file(s)
+  - this should update the relevant CSV file(s)
 - Renting a video out to a customer
   - video *by title*
   - customer *by id*
   - **IMPORTANT:** Customers should be limited based on their account type. Your application should enforce these limitations when attempting to rent a video!
-  - this should update the relavent CSV file(s)
+  - this should update the relevant CSV file(s)
 - Returning a video from a customer
   - video *by title*
   - customer *by id*
-  - this should update the relavent CSV file(s)
+  - this should update the relevant CSV file(s)
 - Exiting the application
 
 Be sure to give careful consideration into what data structures & data types (including classes) you might need to use in your application logic. Also, your application MUST always keep the CSV data files updated whenever data changes! You need data records to be backed up in a file, in case your application were to crash (and lose data internally).
