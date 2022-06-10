@@ -1,4 +1,4 @@
-# Assessment 2: Object Oriented Programming + CSV Reading/Writing
+# Assessment 2: Object Oriented Programming + CSV Reading
 - **Video Inventory Manager**
 
 ## Important Grading Information
