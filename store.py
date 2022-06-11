@@ -15,13 +15,9 @@ id                       title               rating             release_year    
 {video['video_id']}      {video['title']}    {video['rating']}  {video['release_year']} {video['copies_available']} 
 ''')
     def find_rentals_by_customer_id(self, input_id):
-        #todo: what if customer is not in list? print message 
         input_id = int(input_id)
-        all_customer_ids = [customer.customer_id for customer in self.customers]
-        while True:
-            if input_id not in all_customer_ids:
-                print('No customer matches input: {input_id}')
-            else:
+        for customer in self.customers:
+            if(customer.customer_id == input_id):
                 return customer.current_video_rentals
 
     def add_customer(self, customer_data):
@@ -40,10 +36,9 @@ id                       title               rating             release_year    
             if(item['title'] == input_title):
                 item['copies_available'] -= 1
             
-        
         #add to customer current video rentals
         #todo: make sure the formatting for current video rentals is correct
-        #if not exist, make new [] and append only the name
+        #if not exist, make new [] and append only the name?
         #if exists, append with / + input_title
         for customer in self.customers:
             if customer.customer_id == input_customer_id:
@@ -54,24 +49,25 @@ id                       title               rating             release_year    
             #print(customer.current_video_rentals)
     def return_video(self, input_customer_id, input_title):
         input_customer_id = int(input_customer_id)
-        #increment record in inventory
-        for item in self.inventory:
-            if(item['title'] == input_title):
-                item['copies_available'] += 1
-
+        #remove from customer's rentals list
         for customer in self.customers:
             if customer.customer_id == input_customer_id:
                 rentals_list = customer.current_video_rentals.split('/')
                 if(input_title in rentals_list):
+                    print(f'match: {input_title} in {rentals_list}, returning to shelf...')
                     rentals_list.remove(input_title)
-                    print(f'match: {input_title} in {rentals_list}')
                     customer.current_video_rentals = '/'.join(rentals_list)
-                    print(f'current_video_rentals:   {customer.current_video_rentals}')
+#                    print(f'current_video_rentals:   {customer.current_video_rentals}')
                 else:
                     print('no match')
+        #increment matching record in inventory
+        for item in self.inventory:
+            if(item['title'] == input_title):
+                item['copies_available'] += 1
                 
 codeplatoon_store = Store()
 
+#todo: possibly create a decorator fucntion here?
 def customerMaker(**customer_data):
     print(customer_data)
     if(customer_data['account_type'] == 'sx'):
@@ -104,4 +100,3 @@ with open('data/inventory.csv', newline='') as csvfile:
         copies_available = int(row['copies_available'])
         codeplatoon_store.inventory.append({'video_id': video_id, 'title':row['title'], 'rating': row['rating'], 'release_year': release_year, 'copies_available': copies_available})
 
-codeplatoon_store.find_rentals_by_customer_id(2)
