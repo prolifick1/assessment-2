@@ -30,13 +30,13 @@ id                       title               rating             release_year    
     def rent_video(self, input_customer_id, input_title):
         input_customer_id = int(input_customer_id)
 #[{'video_id': 1, 'title': 'Toy Story', 'rating': 'G', 'release_year': 1995, 'copies_available': 0}, {'video_id': 2, 'title': 'WALL-E', 'rating': 'G', 'release_year': 2008, 'copies_available': 2}, {'video_id': 3, 'title': 'Up', 'rating': 'G', 'release_year': 2009, 'copies_available': 5}, {'video_id': 4, 'title': 'Inside Out', 'rating': 'PG', 'release_year': 2015, 'copies_available': 1}, {'video_id': 5, 'title': 'The Prestige', 'rating': 'PG-13', 'release_year': 2006, 'copies_available': 2}, {'video_id': 6, 'title': 'The Dark Knight', 'rating': 'PG-13', 'release_year': 2008, 'copies_available': 3}, {'video_id': 7, 'title': 'Inception', 'rating': 'PG-13', 'release_year': 2010, 'copies_available': 4}, {'video_id': 8, 'title': 'Intersteller', 'rating': 'PG-13', 'release_year': 2014, 'copies_available': 2}, {'video_id': 9, 'title': 'Deadpool', 'rating': 'R', 'release_year': 2016, 'copies_available': 3}, {'video_id': 10, 'title': 'The Godfather', 'rating': 'R', 'release_year': 1972, 'copies_available': 0}]
-        #decrement record in inventory
-        #todo: must make sure cannot go below 0!
+        #todo: must make sure inventory cannot go below 0!
+        
         for item in self.inventory:
             if(item['title'] == input_title):
                 item['copies_available'] -= 1
             
-        #add to customer current video rentals
+        #todo: must make sure number doesn't go over limit for account type
         #todo: make sure the formatting for current video rentals is correct
         #if not exist, make new [] and append only the name?
         #if exists, append with / + input_title
