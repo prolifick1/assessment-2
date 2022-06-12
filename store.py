@@ -1,4 +1,5 @@
 import csv
+from tabulate import tabulate
 from customer import sxCustomer, pxCustomer, sfCustomer, pfCustomer
 class Store:
     def __init__(self):
@@ -6,14 +7,9 @@ class Store:
         self.inventory = []
     
     def view_store_inventory(self):
-        #todo: do this but with using an ascii table creator module 
-        print(f'''
-id                       title               rating             release_year            copies_available
-''')
-        for video in self.inventory:
-            print(f'''
-{video['video_id']}      {video['title']}    {video['rating']}  {video['release_year']} {video['copies_available']} 
-''')
+        all_videos = [[video['video_id'], video['title'], video['rating'], video['release_year'], video['copies_available']] for video in self.inventory]
+        print(tabulate(all_videos, headers=['id', 'title', 'rating', 'release year', 'copies available']))
+
     def find_rentals_by_customer_id(self, input_id):
         input_id = int(input_id)
         for customer in self.customers:
@@ -23,23 +19,16 @@ id                       title               rating             release_year    
     def add_customer(self, customer_data):
         #todo: handle incorrect data, duplicate id, etc
         customer_data['customer_id'] = int(customer_data['customer_id'])
-        print(customer_data)
         new_customer = customerMaker(**customer_data)
         self.customers.append(new_customer)
 
     def rent_video(self, input_customer_id, input_title):
         input_customer_id = int(input_customer_id)
-#[{'video_id': 1, 'title': 'Toy Story', 'rating': 'G', 'release_year': 1995, 'copies_available': 0}, {'video_id': 2, 'title': 'WALL-E', 'rating': 'G', 'release_year': 2008, 'copies_available': 2}, {'video_id': 3, 'title': 'Up', 'rating': 'G', 'release_year': 2009, 'copies_available': 5}, {'video_id': 4, 'title': 'Inside Out', 'rating': 'PG', 'release_year': 2015, 'copies_available': 1}, {'video_id': 5, 'title': 'The Prestige', 'rating': 'PG-13', 'release_year': 2006, 'copies_available': 2}, {'video_id': 6, 'title': 'The Dark Knight', 'rating': 'PG-13', 'release_year': 2008, 'copies_available': 3}, {'video_id': 7, 'title': 'Inception', 'rating': 'PG-13', 'release_year': 2010, 'copies_available': 4}, {'video_id': 8, 'title': 'Intersteller', 'rating': 'PG-13', 'release_year': 2014, 'copies_available': 2}, {'video_id': 9, 'title': 'Deadpool', 'rating': 'R', 'release_year': 2016, 'copies_available': 3}, {'video_id': 10, 'title': 'The Godfather', 'rating': 'R', 'release_year': 1972, 'copies_available': 0}]
-        #todo: must make sure inventory cannot go below 0!
         
         for item in self.inventory:
             if(item['title'] == input_title):
                 item['copies_available'] -= 1
             
-        #todo: must make sure number doesn't go over limit for account type
-        #todo: make sure the formatting for current video rentals is correct
-        #if not exist, make new [] and append only the name?
-        #if exists, append with / + input_title
         for customer in self.customers:
             if customer.customer_id == input_customer_id:
                 if(customer.current_video_rentals):
@@ -68,7 +57,7 @@ id                       title               rating             release_year    
                 
 codeplatoon_store = Store()
 
-#todo: possibly create a decorator fucntion here?
+#todo: possibly use a decorator fucntion here?
 def customerMaker(**customer_data):
     print(customer_data)
     if(customer_data['account_type'] == 'sx'):
@@ -90,8 +79,6 @@ with open('data/customers.csv', newline='') as csvfile:
         current_video_rentals = row['current_video_rentals']
         new_customer = customerMaker(customer_id=customer_id, account_type=account_type, first_name=first_name, last_name=last_name, current_video_rentals=current_video_rentals)
         codeplatoon_store.customers.append(new_customer)
-    for customer in codeplatoon_store.customers:
-        print(customer.customer_id, customer.first_name, customer.account_type)
 
 with open('data/inventory.csv', newline='') as csvfile:
     reader = csv.DictReader(csvfile)
