@@ -1,11 +1,9 @@
 # this file performs all input gathering and validation before sending off to
 # instance to perform the task
-from store import codeplatoon_store
+from store import codeplatoon_store, Store
 
 mode = None
 
-all_videos = [item['title'] for item in codeplatoon_store.inventory]
-all_customer_ids = [customer.customer_id for customer in codeplatoon_store.customers]
 
 while(mode != '6'):
     mode = input("""
@@ -25,8 +23,8 @@ while(mode != '6'):
         while(loop):
             customer_id = input('Enter id of customer: ')
             if(not customer_id.isnumeric()):
-                print('\nERROR: User id must be numeric')
-            elif int(customer_id) not in all_customer_ids:
+                print('\nERROR: Customer id must be a valid number')
+            elif int(customer_id) not in Store.all_customer_ids():
                 print(f'\nERROR: customer "{customer_id}" not found')
             else:
                 customer_id = int(customer_id)
@@ -39,10 +37,10 @@ while(mode != '6'):
         while loop:
             user_input = input('Enter customer id: ') 
             if(not user_input.isnumeric()):
-                print(f'\nERROR: User id must be numeric'); 
+                print(f'\nERROR: Customer id must be a valid number'); 
             else:
                 customer_data['customer_id'] = int(user_input)
-                if(customer_data['customer_id'] in all_customer_ids):
+                if(customer_data['customer_id'] in Store.all_customer_ids()):
                     print(f'\nERROR: Cannot add customer id: {user_input} because it already exists')
                 else:
                     loop=False
@@ -68,6 +66,7 @@ while(mode != '6'):
                     else:
                         loop=False
                 codeplatoon_store.add_customer(customer_data)
+                print('\nSUCCESS: Customer created')
 
     elif mode == '4':
         customer = None
@@ -76,8 +75,8 @@ while(mode != '6'):
         while(loop):
             customer_id = input('Enter id of customer making the rental: ')
             if(not customer_id.isnumeric()):
-                print('\nERROR: User id must be numeric')
-            elif(int(customer_id) not in all_customer_ids):
+                print('\nERROR: Customer id must be a valid number')
+            elif(int(customer_id) not in Store.all_customer_ids()):
                 print(f'\nERROR: Customer id {customer_id} not found')
             else:
                 for i, customer in enumerate(codeplatoon_store.customers):
@@ -93,7 +92,7 @@ while(mode != '6'):
         loop = True
         while(loop):
             video_title = input('Enter video title to rent (case sensitive): ')
-            if video_title not in all_videos:
+            if video_title not in Store.all_video_titles():
                 print(f'\nERROR: Your search for "{video_title}" did not match any video titles')
             elif customer.limit_rating:
                 video_rating = [video['rating'] for video in codeplatoon_store.inventory if video['title'] == video_title][0]
@@ -105,26 +104,26 @@ while(mode != '6'):
                 if item['title'] == video_title and item['copies_available'] == 0:
                     print(f'\nERROR: "{video_title}": title out of stock')
                 elif item['title'] == video_title and item['copies_available'] > 0:
-                    print(f'\nSUCCESS: "{video_title}": title is available. Enjoy your rental.')
                     loop = False
-            codeplatoon_store.rent_video(customer_id, video_title) 
+                    codeplatoon_store.rent_video(customer_id, video_title) 
+                    print(f'\nSUCCESS: "{video_title}": title is available. Enjoy your rental.')
     elif mode == '5':
         # validate that the input customer_id is numeric and exists
         loop = True
         while(loop):
             customer_id = input('Enter id of customer returning the rental: ')
             if(not customer_id.isnumeric()):
-                print('\nERROR: User id must be numeric')
-            elif(int(customer_id) not in all_customer_ids):
+                print('\nERROR: Customer id must be a valid number')
+            elif(int(customer_id) not in Store.all_customer_ids()):
                 print(f'\nERROR: Customer id {customer_id} not found')
             else:
                 loop = False
         loop = True
         # validate that the input video title is part of store inventory,
-        # and that the customer has it in their current rentals
+        # and that the customer has the input video title in their current rentals
         while(loop):
             video_title = input('Enter video title to return (case sensitive): ')
-            if video_title not in all_videos:
+            if video_title not in Store.all_video_titles():
                 print(f'\nERROR: Your search for "{video_title}" did not match any video titles')
             else:
                 for i, customer in enumerate(codeplatoon_store.customers):
@@ -134,6 +133,7 @@ while(mode != '6'):
                             print(f'\nDENIED: Customer does not have "{video_title}" in ther current rentals: {customer.current_video_rentals}')
                         else:
                             codeplatoon_store.return_video(int(customer_id), video_title)
+                            print(f'\nSUCCESS: {video_title} has been returned to shelf')
                             loop=False
     elif mode == '6':
         break

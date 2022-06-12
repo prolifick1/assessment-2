@@ -28,6 +28,3 @@ class pfCustomer(pxCustomer, sfCustomer):
         self.account_type = account_type
         self.current_video_rentals = current_video_rentals
 
-jon = pfCustomer(10, 'pf', 'jon', 'fancy')
-print(jon.limit_rentals)
-print(jon.limit_rating)

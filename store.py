@@ -1,11 +1,22 @@
 import csv
 from tabulate import tabulate
 from customer import sxCustomer, pxCustomer, sfCustomer, pfCustomer
+
 class Store:
     def __init__(self):
         self.customers = []
         self.inventory = []
-    
+
+    @classmethod
+    def all_video_titles(cls):
+        all_video_titles = [item['title'] for item in codeplatoon_store.inventory]
+        return all_video_titles
+
+    @classmethod
+    def all_customer_ids(cls):
+        all_customer_ids = [customer.customer_id for customer in codeplatoon_store.customers]
+        return all_customer_ids
+
     def view_store_inventory(self):
         all_videos = [[video['video_id'], video['title'], video['rating'], video['release_year'], video['copies_available']] for video in self.inventory]
         print(tabulate(all_videos, headers=['id', 'title', 'rating', 'release year', 'copies available']))
