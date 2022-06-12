@@ -4,6 +4,7 @@ from store import codeplatoon_store
 
 mode = None
 
+all_videos = [item['title'] for item in codeplatoon_store.inventory]
 all_customer_ids = [customer.customer_id for customer in codeplatoon_store.customers]
 print(all_customer_ids)
 while(mode != '6'):
@@ -70,8 +71,8 @@ while(mode != '6'):
 
     elif mode == '4':
         customer = None
-        loop = True
-        # validates user exists and has not yet reached max rental limit
+        # validates user id exists and has not yet reached max rental limit
+        loop=True
         while(loop):
             user_input = input('Enter id of the customer making the rental: ') 
             customer_id = None
@@ -79,8 +80,7 @@ while(mode != '6'):
                 print('\nERROR: customer id must be numeric')
             else: 
                 customer_id = int(user_input)
-                print(customer_id)
-            # validates user input id exists in customers
+        # validates user input id exists in customers
             if(customer_id not in all_customer_ids):
                 print(f'\nERROR: Customer id {customer_id} not found')
             else:
@@ -92,8 +92,8 @@ while(mode != '6'):
                             customer_rentals_total = (len(customer.current_video_rentals.split('/')))
                             if(customer.limit_rentals == customer_rentals_total):
                                 print(f'\nDENIED: {customer.account_type} customer has already reached max rental limit: {customer.limit_rentals} ({customer.current_video_rentals})')
-                        else:
-                            loop = False
+                            else:
+                                loop=False
         # validate input video title is in inventory and doesn't conflict with user's rating limit
         loop = True
         while(loop):
@@ -113,20 +113,30 @@ while(mode != '6'):
                     print(f'\nSUCCESS: "{video_title}": title is available. Enjoy your rental.')
                     loop = False
             codeplatoon_store.rent_video(customer_id, video_title) 
-            break
     elif mode == '5':
-        #validates that user input matches video title to return
+        #validates that user input exists, then 
         loop = True
         while(loop):
             customer_id = input('Enter id of customer returning the rental: ')
             if(not customer_id.isnumeric()):
                 print('\nERROR: User id must be numeric')
+            elif(int(customer_id) not in all_customer_ids):
+                print(f'\nERROR: Customer id {customer_id} not found')
             else:
-                video_title = input('Enter video title to return (case sensitive): ')
-                if video_title not in all_videos:
-                    print(f'\nERROR: Your search for "{video_title}" did not match any video titles')
-                else:
-                    codeplatoon_store.return_video(customer_id, video_title)
-                    loop=False
+                loop = False
+        loop = True
+        while(loop):
+            video_title = input('Enter video title to return (case sensitive): ')
+            if video_title not in all_videos:
+                print(f'\nERROR: Your search for "{video_title}" did not match any video titles')
+            else:
+                for i, customer in enumerate(codeplatoon_store.customers):
+                    if(customer.customer_id == int(customer_id)):
+                        customer = codeplatoon_store.customers[i]
+                        if(video_title not in customer.current_video_rentals):
+                            print(f'\nDENIED: Customer does not have "{video_title}" in ther current rentals: {customer.current_video_rentals}')
+                        else:
+                            codeplatoon_store.return_video(int(customer_id), video_title)
+                            loop=False
     elif mode == '6':
         break
