@@ -6,7 +6,7 @@ mode = None
 
 all_videos = [item['title'] for item in codeplatoon_store.inventory]
 all_customer_ids = [customer.customer_id for customer in codeplatoon_store.customers]
-print(all_customer_ids)
+
 while(mode != '6'):
     mode = input("""
 == Welcome to Code Platoon Video! ==
@@ -71,22 +71,17 @@ while(mode != '6'):
 
     elif mode == '4':
         customer = None
-        # validates user id exists and has not yet reached max rental limit
-        loop=True
+        # validate that user input is numeric and exists
+        loop = True
         while(loop):
-            user_input = input('Enter id of the customer making the rental: ') 
-            customer_id = None
-            if(not user_input.isnumeric()):
-                print('\nERROR: customer id must be numeric')
-            else: 
-                customer_id = int(user_input)
-        # validates user input id exists in customers
-            if(customer_id not in all_customer_ids):
+            customer_id = input('Enter id of customer making the rental: ')
+            if(not customer_id.isnumeric()):
+                print('\nERROR: User id must be numeric')
+            elif(int(customer_id) not in all_customer_ids):
                 print(f'\nERROR: Customer id {customer_id} not found')
             else:
-            # check their max rental limit
                 for i, customer in enumerate(codeplatoon_store.customers):
-                    if(customer.customer_id == customer_id):
+                    if(customer.customer_id == int(customer_id)):
                         customer = codeplatoon_store.customers[i]
                         if(customer.current_video_rentals):
                             customer_rentals_total = (len(customer.current_video_rentals.split('/')))
@@ -114,7 +109,7 @@ while(mode != '6'):
                     loop = False
             codeplatoon_store.rent_video(customer_id, video_title) 
     elif mode == '5':
-        #validates that user input exists, then 
+        # validate that the input customer_id is numeric and exists
         loop = True
         while(loop):
             customer_id = input('Enter id of customer returning the rental: ')
@@ -125,6 +120,8 @@ while(mode != '6'):
             else:
                 loop = False
         loop = True
+        # validate that the input video title is part of store inventory,
+        # and that the customer has it in their current rentals
         while(loop):
             video_title = input('Enter video title to return (case sensitive): ')
             if video_title not in all_videos:
