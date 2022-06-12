@@ -50,16 +50,17 @@ id                       title               rating             release_year    
     def return_video(self, input_customer_id, input_title):
         input_customer_id = int(input_customer_id)
         #remove from customer's rentals list
+        #todo: handle returning rentals when user doesn't have rentals out
         for customer in self.customers:
             if customer.customer_id == input_customer_id:
-                rentals_list = customer.current_video_rentals.split('/')
-                if(input_title in rentals_list):
-                    print(f'match: {input_title} in {rentals_list}, returning to shelf...')
-                    rentals_list.remove(input_title)
-                    customer.current_video_rentals = '/'.join(rentals_list)
-#                    print(f'current_video_rentals:   {customer.current_video_rentals}')
+                if(customer.current_video_rentals):
+                    rentals_list = customer.current_video_rentals.split('/')
+                    if(input_title in rentals_list):
+                        print(f'match: {input_title} in {rentals_list}, returning to shelf...')
+                        rentals_list.remove(input_title)
+                        customer.current_video_rentals = '/'.join(rentals_list)
                 else:
-                    print('no match')
+                    print(f'{input_title} did not match this user\'s current rentals {customer.current_video_rentals}')
         #increment matching record in inventory
         for item in self.inventory:
             if(item['title'] == input_title):
