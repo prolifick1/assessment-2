@@ -1,5 +1,5 @@
-# this file performs all input gathering and validation before sending off to
-# instance to perform the task
+# runner performs all input gathering and validation before sending it to
+# Store class to perform the task
 from store import codeplatoon_store, Store
 
 mode = None
@@ -82,7 +82,9 @@ while(mode != '6'):
                 for i, customer in enumerate(codeplatoon_store.customers):
                     if(customer.customer_id == int(customer_id)):
                         customer = codeplatoon_store.customers[i]
-                        if(customer.current_video_rentals):
+                        if(customer.current_video_rentals == ''):
+                            loop=False
+                        elif(customer.current_video_rentals):
                             customer_rentals_total = (len(customer.current_video_rentals.split('/')))
                             if(customer.limit_rentals == customer_rentals_total):
                                 print(f'\nDENIED: {customer.account_type} customer has already reached max rental limit: {customer.limit_rentals} ({customer.current_video_rentals})')
