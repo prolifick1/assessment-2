@@ -1,9 +1,8 @@
 # runner performs all input gathering and validation before sending it to
-# Store class to perform the task
+# Store class / codeplatoon_store instance to perform the task
 from store import codeplatoon_store, Store
 
 mode = None
-
 
 while(mode != '6'):
     mode = input("""
@@ -82,10 +81,10 @@ while(mode != '6'):
                 for i, customer in enumerate(codeplatoon_store.customers):
                     if(customer.customer_id == int(customer_id)):
                         customer = codeplatoon_store.customers[i]
-                        if(customer.current_video_rentals == ''):
+                        if(customer.current_video_rentals == '' or customer.current_video_rentals == None):
                             loop=False
                         elif(customer.current_video_rentals):
-                            customer_rentals_total = (len(customer.current_video_rentals.split('/')))
+                            customer_rentals_total = len(customer.current_video_rentals.split('/'))
                             if(customer.limit_rentals == customer_rentals_total):
                                 print(f'\nDENIED: {customer.account_type} customer has already reached max rental limit: {customer.limit_rentals} ({customer.current_video_rentals})')
                             else:
@@ -108,7 +107,7 @@ while(mode != '6'):
                 elif item['title'] == video_title and item['copies_available'] > 0:
                     loop = False
                     codeplatoon_store.rent_video(customer_id, video_title) 
-                    print(f'\nSUCCESS: "{video_title}": title is available. Enjoy your rental.')
+                    print(f'\nSUCCESS: "{video_title}" is now rented out to customer.')
     elif mode == '5':
         # validate that the input customer_id is numeric and exists
         loop = True
